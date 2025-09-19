@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My SIH Journey</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  :root {
+    --color-blue: #6a82fb;
+    --color-purple: #764ba2;
+    --color-gradient-start: #667eea;
+    --color-gradient-end: #764ba2;
+    --color-soft-bg: #f5f7ff;
+    --color-text-dark: #222;
+    --color-text-light: #555;
+    --radius: 1rem;
+    --spacing: 1.5rem;
+    --transition: 0.4s ease;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    color: var(--color-text-dark);
+    background: var(--color-soft-bg);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  header {
+    background: linear-gradient(
+      135deg,
+      var(--color-gradient-start),
+      var(--color-gradient-end)
+    );
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 150%;
+    height: 150%;
+    background:
+      radial-gradient(circle at center, rgba(255 255 255 / 0.15), transparent 70%);
+    transform: translateX(-50%);
+    z-index: 0;
+  }
+  header h1 {
+    font-size: 2.75rem;
+    margin: 0 0 0.25rem;
+    position: relative;
+    z-index: 1;
+  }
+  header p {
+    font-size: 1.25rem;
+    margin: 0;
+    font-weight: 500;
+    position: relative;
+    z-index: 1;
+  }
+  main {
+    max-width: 900px;
+    margin: 2rem auto 4rem;
+    padding: 0 1.5rem;
+  }
+  /* Timeline Container */
+  .timeline {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    margin: 3rem auto 5rem;
+    padding: 0 0.5rem;
+  }
+  /* Line Between Checkpoints */
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 4.5%;
+    width: 91%;
+    height: 4px;
+    background: linear-gradient(to right, var(--color-blue), var(--color-purple));
+    transform: translateY(-50%);
+    border-radius: 2px;
+    z-index: 0;
+  }
+  /* Checkpoint Card */
+  .checkpoint {
+    background: white;
+    border-radius: var(--radius);
+    box-shadow: 0 4px 14px rgba(100, 100, 150, 0.1);
+    width: 28%;
+    padding: 1.75rem 1.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  /* Step Number Circle */
+  .step-num {
+    background: linear-gradient(135deg, var(--color-blue), var(--color-purple));
+    color: white;
+    border-radius: 50%;
+    width: 42px;
+    height: 42px;
+    margin: 0 auto 1rem;
+    font-weight: 700;
+    font-size: 1.25rem;
+    line-height: 42px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    user-select: none;
+  }
+  /* Checkpoint Title */
+  .checkpoint h3 {
+    margin: 0.25rem 0 0.2rem;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-dark);
+  }
+  /* Date */
+  .checkpoint time {
+    display: block;
+    margin: 0.15rem 0 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-text-light);
+  }
+  /* Description */
+  .checkpoint p {
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    color: var(--color-text-light);
+  }
+  /* Status badge */
+  .status {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    font-size: 0.9rem;
+    color: white;
+    user-select:none;
+  }
+  .status.completed {
+    background-color: #6a82fb;
+  }
+  .status.inprogress {
+    background-color: #fc5c7d;
+  }
+  .status.upcoming {
+    background-color: #bbb;
+  }
+  /* Icon above title */
+  .checkpoint .icon {
+    font-size: 2rem;
+    margin-bottom: 0.75rem;
+    user-select:none;
+  }
+
+
+  /* About Section */
+  #about {
+    background: white;
+    border-radius: var(--radius);
+    padding: 2rem 2rem 3rem;
+    box-shadow: 0 8px 20px rgba(100, 100, 150, 0.1);
+    color: var(--color-text-dark);
+  }
+  #about h2 {
+    font-size: 1.8rem;
+    color: var(--color-gradient-end);
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  #about p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  #about ul {
+    margin-left: 1.25rem;
+    color: var(--color-text-light);
+  }
+  #about ul li {
+    margin-bottom: 0.5rem;
+  }
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 1.25rem 2rem;
+    font-size: 0.9rem;
+    background: #212121;
+    color: #eee;
+  }
+
+  /* Responsive */
+  @media (max-width: 767px) {
+    .timeline {
+      flex-direction: column;
+      margin: 2rem auto 4rem;
+    }
+    .timeline::before {
+      width: 4px;
+      height: 85%;
+      left: 50%;
+      top: 7.5%;
+      transform: translateX(-50%);
+    }
+    .checkpoint {
+      width: 90%;
+      margin-bottom: 2rem;
+    }
+    .step-num {
+      margin: 0 0 0.75rem 1rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>My SIH Journey</h1>
+  <p>Tracking my milestones in the Smart India Hackathon</p>
+</header>
+
+<main>
+  <section class="timeline" aria-label="Milestones timeline">
+    <div class="checkpoint" tabindex="0">
+      <div class="step-num">1</div>
+      <div class="icon" aria-hidden="true">📅</div>
+      <h3>First Internal Hackathon</h3>
+      <time datetime="2025-09-19">19th September 2025</time>
+      <p>The launchpad event where I honed my project skills for SIH.</p>
+      <span class="status completed">Completed</span>
+    </div>
+    <div class="checkpoint" tabindex="0">
+      <div class="step-num">2</div>
+      <div class="icon" aria-hidden="true">🏆</div>
+      <h3>SIH Selection Round</h3>
+      <time datetime="2025-XX-XX">Date TBD</time>
+      <p>The crucial round that chose the finalists for the Smart India Hackathon.</p>
+      <span class="status inprogress">In Progress</span>
+    </div>
+    <div class="checkpoint" tabindex="0">
+      <div class="step-num">3</div>
+      <div class="icon" aria-hidden="true">🚀</div>
+      <h3>SIH Finals</h3>
+      <time datetime="2025-XX-XX">Date TBD</time>
+      <p>The grand finale where ultimate innovation is showcased on the national stage.</p>
+      <span class="status upcoming">Upcoming</span>
+    </div>
+  </section>
+
+  <section id="about" aria-label="About Smart India Hackathon and Project">
+    <h2>About Our Project & Team</h2>
+    <p><strong>Team Name:</strong> CRIMSON CREW</p>
+    <p><strong>Problem Statement:</strong> AI & IoT Powered Intelligent System for Real-Time Elephant Movement Detection & Prevention of Human-Elephant Conflict (HEC)</p>
+    <p><strong>Project Summary:</strong></p>
+    <ul>
+      <li>IoT-based smart surveillance and alert system deployed at villages and forest borders using multimodal sensors (thermal/IR cameras, PIR, acoustic, vibration, drones).</li>
+      <li>AI/ML algorithms for vision and audio classification optimized for edge devices provide real-time alerts via mobile app, SMS, loudspeakers, and sirens.</li>
+      <li>Use of non-harmful deterrents like lights, ultrasonic sound, chili-smoke, and drones to prevent conflicts.</li>
+      <li>Cloud dashboard for hotspot detection, movement prediction, and analytics assists forest officials with monitoring and decision-making.</li>
+    </ul>
+    <p><strong>Innovation & Impact:</strong></p>
+    <ul>
+      <li>Multimodal fusion (vision + audio + vibration) reduces false positives for reliable detection.</li>
+      <li>Edge AI inference enables real-time detection even without internet connectivity.</li>
+      <li>Solar-powered, low-cost, durable hardware designed for remote rural deployment.</li>
+      <li>Supports wildlife conservation, prevents property loss, and aligns with environmental sustainability goals.</li>
+    </ul>
+    <p><strong>About Smart India Hackathon:</strong> The Smart India Hackathon is a nationwide initiative that empowers students to solve real-world problems leveraging technology and innovation. Achieving milestones within this competition demonstrates dedication, skill enhancement, and teamwork.</p>
+  </section>
+</main>
+
+<footer>
+  © 2025 My SIH Journey | Built by GKR
+</footer>
+
+</body>
+</html>
